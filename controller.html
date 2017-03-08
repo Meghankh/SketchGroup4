@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Controller</title>
+	<style>
+			
+			table {
+				width: 90%;
+				position: center;
+			}
+			td {
+				width: 15%;
+				position: relative;
+			}
+			td .content {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;	
+				right: 0;
+			}
+			td .content.name {
+				display: table-cell;
+				background: none;
+				text-align: center;
+				top: 50%;
+			    width: 100%;
+			}
+			.button {
+				/*background-color: green;
+				backface-visibility: hidden;*/
+				position: absolute;
+				top: 0;
+				left: 0;
+				perspective: 1000px;
+				padding: 2px;
+			}
+			.button {
+				overflow: hidden;
+				position: relative;
+				background-color: white;
+				font-size: 36px;
+				text-align: center;
+			}
+			img {
+				max-height: 100%;
+				max-width: 100%;
+				width: auto;
+				height: auto;
+				position: center;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+		</style>
+		<!-- <link href="./test.css" rel="stylesheet"> -->
+	</head>
+	<body>
+		<div>
+			<table>
+				<tr>
+					<td>
+						<div class="button" id="_1">
+							<img src="images/1.jpg" />
+						</div>
+					</td>
+					<td>
+						<div class="button" id="_2">
+							<img src="images/2.jpg" />
+						</div>
+					</td>
+					<td>
+						<div class="button" id="_3">
+							<img src="images/3.gif" />
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="button" id="_4">
+							<img src="images/4.png" />
+						</div>
+					</td>
+					<td>
+						<div class="button" id="_5">
+							<img src="images/5.png" />
+						</div>
+					</td>
+					<td>
+						<div class="button" id="_6">
+							<img src="images/6.jpeg" />
+						</div>
+					</td>
+				</tr>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+			$(".content").on("click", function(e) {
+				//what happens on click
+			});
+		</script>
+	</body>
+</html>
