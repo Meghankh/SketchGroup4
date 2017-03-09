@@ -28,8 +28,27 @@ td div {
     display: none;
 }
 
-#meter {
-    background-color: blue;
+#meter1 {
+    background-image: url(../images/bar1.jpg);
+    background-size: contain;
+}
+
+#meter2 {
+    background-image: url(../images/bar2.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#meter3 {
+    background-image: url(../images/bar3.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#meter4 {
+    background-image: url(../images/bar4.jpg);
+    background-size: contain;
+    display: none;
 }
 
 .content {
