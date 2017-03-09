@@ -6,27 +6,41 @@ td div {
 }
 
 #baby1 {
-    background-image: url(../images/baby1.jpeg);
+    background-image: url(../images/baby6.jpg);
     background-size: contain;
 }
 
 #baby2 {
-    background-image: url(../images/baby2.jpeg);
+    background-image: url(../images/baby5.jpg);
     background-size: contain;
     display: none;
 }
 
 #baby3 {
-    background-image: url(../images/baby3.jpeg);
+    background-image: url(../images/baby4.jpg);
     background-size: contain;
     display: none;
 }
 
 #baby4 {
-    background-image: url(../images/baby4.jpeg);
+    background-image: url(../images/baby3.jpg);
     background-size: contain;
     display: none;
 }
+
+#baby5 {
+    background-image: url(../images/baby2.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#baby6 {
+    background-image: url(../images/baby1.jpg);
+    background-size: contain;
+    display: none;
+}
+
+
 
 #meter1 {
     background-image: url(../images/bar1.jpg);
