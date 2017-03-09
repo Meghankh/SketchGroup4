@@ -77,8 +77,13 @@ jQuery('document').ready(function() {
         jQuery('#meter' + currentPosition).show();
     }
 
-    jQuery('table').click(function() {
+    jQuery('#babypic').click(function() {
         increase();
     });
+
+    jQuery('#meterbar').click(function() {
+        decrease();
+    });
+
 });
 
