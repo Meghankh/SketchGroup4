@@ -2,19 +2,22 @@
 td div {
     border: 2px solid;
     border-radius: 25px;
-    display: inline-block;
-    height: 300px;
+    height: 480px;
 }
 
 #baby {
-    width: 100%;
+    background-color: red;
 }
 
 #meter {
-    width: 100%;
+    background-color: blue;
 }
 
 .content {
     width: 960px;
+}
+
+table {
+    width: 100%;
 }
 
