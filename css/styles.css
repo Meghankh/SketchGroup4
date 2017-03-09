@@ -1,0 +1,20 @@
+
+td div {
+    border: 2px solid;
+    border-radius: 25px;
+    display: inline-block;
+    height: 300px;
+}
+
+#baby {
+    width: 100%;
+}
+
+#meter {
+    width: 100%;
+}
+
+.content {
+    width: 960px;
+}
+
