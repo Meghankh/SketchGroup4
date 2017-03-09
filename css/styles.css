@@ -6,7 +6,8 @@ td div {
 }
 
 #baby {
-    background-color: red;
+    background-image: url(../images/baby1.jpeg);
+    background-size: contain;
 }
 
 #meter {
