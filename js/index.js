@@ -5,11 +5,11 @@ jQuery('document').ready(function() {
 
     function increase() {
         jQuery('#meter' + currentPosition).hide();
-        if (currentPosition < 12)
+        if (currentPosition < 11)
         {
             currentPosition++;
         }
-        if (currentPosition < 3)
+        if (currentPosition < 2)
         {
             jQuery('#baby2').hide();
             jQuery('#baby3').hide();
@@ -18,7 +18,7 @@ jQuery('document').ready(function() {
             jQuery('#baby6').hide();
             jQuery('#baby1').show();
         }
-        if (currentPosition == 3 || currentPosition == 4)
+        if (currentPosition == 2 || currentPosition == 3)
         {
             jQuery('#baby1').hide();
             jQuery('#baby3').hide();
@@ -27,7 +27,7 @@ jQuery('document').ready(function() {
             jQuery('#baby6').hide();
             jQuery('#baby2').show();
         }
-        if (currentPosition == 5 || currentPosition == 6)
+        if (currentPosition == 4 || currentPosition == 5 || currentPosition == 6)
         {
             jQuery('#baby1').hide();
             jQuery('#baby2').hide();
@@ -63,7 +63,6 @@ jQuery('document').ready(function() {
             jQuery('#baby5').hide();
             jQuery('#baby6').show();
         }
-
         jQuery('#meter' + currentPosition).show();
     }
 
@@ -73,7 +72,7 @@ jQuery('document').ready(function() {
         {
             currentPosition--;
         }
-        if (currentPosition < 3)
+        if (currentPosition < 2)
         {
             jQuery('#baby2').hide();
             jQuery('#baby3').hide();
@@ -82,7 +81,7 @@ jQuery('document').ready(function() {
             jQuery('#baby6').hide();
             jQuery('#baby1').show();
         }
-        if (currentPosition == 3 || currentPosition == 4)
+        if (currentPosition == 2 || currentPosition == 3)
         {
             jQuery('#baby1').hide();
             jQuery('#baby3').hide();
@@ -91,7 +90,7 @@ jQuery('document').ready(function() {
             jQuery('#baby6').hide();
             jQuery('#baby2').show();
         }
-        if (currentPosition == 5 || currentPosition == 6)
+        if (currentPosition == 4 || currentPosition == 5 || currentPosition == 6)
         {
             jQuery('#baby1').hide();
             jQuery('#baby2').hide();
