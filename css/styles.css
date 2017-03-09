@@ -8,6 +8,7 @@ td div {
 #baby1 {
     background-image: url(../images/baby6.jpg);
     background-size: contain;
+    display: none;
 }
 
 #baby2 {
@@ -19,7 +20,6 @@ td div {
 #baby3 {
     background-image: url(../images/baby4.jpg);
     background-size: contain;
-    display: none;
 }
 
 #baby4 {
@@ -45,6 +45,7 @@ td div {
 #meter1 {
     background-image: url(../images/bar1.jpg);
     background-size: contain;
+    display: none;
 }
 
 #meter2 {
@@ -68,7 +69,6 @@ td div {
 #meter5 {
     background-image: url(../images/bar5.jpg);
     background-size: contain;
-    display: none;
 }
 
 #meter6 {

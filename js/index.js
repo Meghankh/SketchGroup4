@@ -1,7 +1,7 @@
 
 jQuery('document').ready(function() {
 
-    var currentPosition = 1;
+    var currentPosition = 5;
 
     function increase() {
         jQuery('#meter' + currentPosition).hide();
@@ -69,7 +69,7 @@ jQuery('document').ready(function() {
 
     function decrease() {
         jQuery('#meter' + currentPosition).hide();
-        if (currentPosition > 0) 
+        if (currentPosition > 1) 
         {
             currentPosition--;
         }
