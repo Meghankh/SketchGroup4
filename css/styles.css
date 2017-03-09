@@ -5,9 +5,27 @@ td div {
     height: 480px;
 }
 
-#baby {
+#baby1 {
     background-image: url(../images/baby1.jpeg);
     background-size: contain;
+}
+
+#baby2 {
+    background-image: url(../images/baby2.jpeg);
+    background-size: contain;
+    display: none;
+}
+
+#baby3 {
+    background-image: url(../images/baby3.jpeg);
+    background-size: contain;
+    display: none;
+}
+
+#baby4 {
+    background-image: url(../images/baby4.jpeg);
+    background-size: contain;
+    display: none;
 }
 
 #meter {
