@@ -1,6 +1,9 @@
-var app = require('express')();//function handler
+var express = require('express');
+var app = express(); //function handler
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+app.use(express.static(__dirname + '/'));
 
 //run node index.js --> Hellow world gets sent
 /*app.get('/', function(req, res){
