@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+  <script>
+    $(function () {
+      var socket = io();
+      //and the socket will let us grab messages
+      //from the server and display them here
+      socket.on('chat message', function(msg){
+        //ok this is where the events will be processed
+        //msg will be _# depending on the id
+        console.log(msg);
+        $('#messages').append($('<li>').text(msg));
+    });
+    });
+  </script>
+
+  <body>
+    <ul id="messages"></ul>
+  </body>
+</html>

@@ -57,49 +57,59 @@
 		</style>
 		<!-- <link href="./test.css" rel="stylesheet"> -->
 	</head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+  	<script>
+    	$(function () {
+      	var socket = io();
+      	$(".button").on("click", function(e) {
+			//what happens on click
+        	//we will emit a message to the server
+        	var icon = this.id;
+        	socket.emit('chat message', icon);
+        		console.log(icon);
+			});
+    	});
+  </script>
 	<body>
 		<div>
 			<table>
 				<tr>
 					<td>
 						<div class="button" id="_1">
-							<img src="images/1.jpg" />
+							<img src="../images/1.jpg" />
 						</div>
 					</td>
 					<td>
 						<div class="button" id="_2">
-							<img src="images/2.jpg" />
+							<img src="../images/2.jpg" />
 						</div>
 					</td>
 					<td>
 						<div class="button" id="_3">
-							<img src="images/3.gif" />
+							<img src="../images/3.gif" />
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
 						<div class="button" id="_4">
-							<img src="images/4.png" />
+							<img src="../images/4.png" />
 						</div>
 					</td>
 					<td>
 						<div class="button" id="_5">
-							<img src="images/5.jpg" />
+							<img src="../images/5.jpg" />
 						</div>
 					</td>
 					<td>
 						<div class="button" id="_6">
-							<img src="images/6.jpeg" />
+							<img src="../images/6.jpeg" />
 						</div>
 					</td>
 				</tr>
 		</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script>
-			$(".button").on("click", function(e) {
-				//what happens on click
-			});
-		</script>
 	</body>
 </html>
