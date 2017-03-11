@@ -12,7 +12,8 @@
 jQuery('document').ready(function() {
 
     function Model () {
-        this.level = 4.0
+        this.sublevel = 0.0;
+        this.level = 4.0;
 
         this.updateBaby = function() {
             if (this.level < 1.0)
@@ -73,25 +74,36 @@ jQuery('document').ready(function() {
 
         this.showMeter = function() {
             displayLevel = Math.round(this.level);
-            console.log(displayLevel);
+            displaySublevel = Math.round(this.sublevel);
             jQuery('#meter' + displayLevel).show();
+            jQuery('#progress' + displaySublevel).show();
         };
 
         this.hideMeter = function() {
             displayLevel = Math.round(this.level);
-            console.log(displayLevel);
+            displaySublevel = Math.round(this.sublevel);
             jQuery('#meter' + displayLevel).hide();
+            jQuery('#progress' + displaySublevel).hide();
         };
 
         this.increase = function() {
             if (this.level < 9.0) {
-                this.level++;
+                this.sublevel = (this.sublevel + 1) % 5;
+                if (this.sublevel == 0.0) {
+                    this.level++;
+                }
             }
         };
 
         this.decrease = function() {
-            if (this.level > 0.0) {
-                this.level--;
+            if (!(this.level == 0.0 && this.sublevel == 0.0)) {
+                this.sublevel--;
+                if (this.sublevel < 0.0){
+                    this.sublevel = 4.0
+                }
+                if (this.sublevel == 0.0) {
+                    this.level--;
+                }
             }
         };
     }

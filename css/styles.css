@@ -10,6 +10,12 @@
     height: 446px;
 }
 
+#progressbar div {
+    border: 2px solid;
+    height: 446px;
+    width: 180;
+}
+
 #baby1 {
     background-image: url(../images/baby6.jpg);
     background-size: contain;
@@ -105,11 +111,44 @@
     display: none;
 }
 
+#progress0 {
+    background-image: url(../images/progress0.jpg);
+    background-size: contain;
+}
+
+#progress1 {
+    background-image: url(../images/progress1.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#progress2 {
+    background-image: url(../images/progress2.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#progress3 {
+    background-image: url(../images/progress3.jpg);
+    background-size: contain;
+    display: none;
+}
+
+#progress4 {
+    background-image: url(../images/progress4.jpg);
+    background-size: contain;
+    display: none;
+}
+
 .content {
     width: 960px;
 }
 
 table {
     width: 100%;
+}
+
+body {
+    background-color: steelblue;
 }
 
