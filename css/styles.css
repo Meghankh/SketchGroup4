@@ -1,8 +1,13 @@
 
-td div {
+#babypic div {
     border: 2px solid;
     border-radius: 25px;
-    height: 480px;
+    height: 446px;
+}
+
+#meterbar div {
+    border: 2px solid;
+    height: 446px;
 }
 
 #baby1 {
@@ -41,78 +46,64 @@ td div {
 }
 
 
+#meter0 {
+    background-image: url(../images/Meter0.jpg);
+    background-size: contain;
+    display: none;
+}
 
 #meter1 {
-    background-image: url(../images/bar1.jpg);
+    background-image: url(../images/Meter1.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter2 {
-    background-image: url(../images/bar2.jpg);
+    background-image: url(../images/Meter2.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter3 {
-    background-image: url(../images/bar3.jpg);
+    background-image: url(../images/Meter3.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter4 {
-    background-image: url(../images/bar4.jpg);
+    background-image: url(../images/Meter4.jpg);
+    background-size: contain;
+}
+
+#meter5 {
+    background-image: url(../images/Meter5.jpg);
     background-size: contain;
     display: none;
 }
 
-#meter5 {
-    background-image: url(../images/bar5.jpg);
-    background-size: contain;
-}
-
 #meter6 {
-    background-image: url(../images/bar6.jpg);
+    background-image: url(../images/Meter6.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter7 {
-    background-image: url(../images/bar7.jpg);
+    background-image: url(../images/Meter7.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter8 {
-    background-image: url(../images/bar8.jpg);
+    background-image: url(../images/Meter8.jpg);
     background-size: contain;
     display: none;
 }
 
 #meter9 {
-    background-image: url(../images/bar9.jpg);
+    background-image: url(../images/Meter9.jpg);
     background-size: contain;
     display: none;
 }
-
-#meter10 {
-    background-image: url(../images/bar10.jpg);
-    background-size: contain;
-    display: none;
-}
-
-#meter11 {
-    background-image: url(../images/bar11.jpg);
-    background-size: contain;
-    display: none;
-}
-
-
-
-
-
-
-
 
 .content {
     width: 960px;

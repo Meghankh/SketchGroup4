@@ -1,140 +1,115 @@
 
+
+
+
+
+
+
+
+
+
+
 jQuery('document').ready(function() {
 
-    var currentPosition = 5;
+    function Model () {
+        this.level = 4.0
 
-    function increase() {
-        jQuery('#meter' + currentPosition).hide();
-        if (currentPosition < 11)
-        {
-            currentPosition++;
-        }
-        if (currentPosition < 2)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby1').show();
-        }
-        if (currentPosition == 2 || currentPosition == 3)
-        {
-            jQuery('#baby1').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby2').show();
-        }
-        if (currentPosition == 4 || currentPosition == 5 || currentPosition == 6)
-        {
-            jQuery('#baby1').hide();
-            jQuery('#baby2').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby3').show();
-        }
-        if (currentPosition == 7 || currentPosition == 8)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby4').show();
-        }
-        if (currentPosition == 9 || currentPosition == 10)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby5').show();
-        }
-        if (currentPosition > 10)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').show();
-        }
-        jQuery('#meter' + currentPosition).show();
+        this.updateBaby = function() {
+            if (this.level < 1.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby1').show();
+            }
+            if (this.level >= 1.0 && this.level < 3.0)
+            {
+                jQuery('#baby1').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby2').show();
+            }
+            if (this.level >= 3.0 && this.level < 5.0)
+            {
+                jQuery('#baby1').hide();
+                jQuery('#baby2').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby3').show();
+            }
+            if (this.level >= 5.0 && this.level < 7.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby4').show();
+            }
+            if (this.level >= 7.0 && this.level < 9.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby5').show();
+            }
+            if (this.level >= 9.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').show();
+            }
+        };
+
+        this.showMeter = function() {
+            displayLevel = Math.round(this.level);
+            console.log(displayLevel);
+            jQuery('#meter' + displayLevel).show();
+        };
+
+        this.hideMeter = function() {
+            displayLevel = Math.round(this.level);
+            console.log(displayLevel);
+            jQuery('#meter' + displayLevel).hide();
+        };
+
+        this.increase = function() {
+            if (this.level < 9.0) {
+                this.level++;
+            }
+        };
+
+        this.decrease = function() {
+            if (this.level > 0.0) {
+                this.level--;
+            }
+        };
     }
 
-    function decrease() {
-        jQuery('#meter' + currentPosition).hide();
-        if (currentPosition > 1) 
-        {
-            currentPosition--;
-        }
-        if (currentPosition < 2)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby1').show();
-        }
-        if (currentPosition == 2 || currentPosition == 3)
-        {
-            jQuery('#baby1').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby2').show();
-        }
-        if (currentPosition == 4 || currentPosition == 5 || currentPosition == 6)
-        {
-            jQuery('#baby1').hide();
-            jQuery('#baby2').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby3').show();
-        }
-        if (currentPosition == 7 || currentPosition == 8)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby4').show();
-        }
-        if (currentPosition == 9 || currentPosition == 10)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby6').hide();
-            jQuery('#baby5').show();
-        }
-        if (currentPosition > 10)
-        {
-            jQuery('#baby2').hide();
-            jQuery('#baby3').hide();
-            jQuery('#baby1').hide();
-            jQuery('#baby4').hide();
-            jQuery('#baby5').hide();
-            jQuery('#baby6').show();
-        }
-        jQuery('#meter' + currentPosition).show();
-    }
+    var model = new Model();
 
     jQuery('#babypic').click(function() {
-        increase();
+        model.hideMeter();
+        model.increase();
+        model.showMeter();
+        model.updateBaby();
     });
 
     jQuery('#meterbar').click(function() {
-        decrease();
+        model.hideMeter();
+        model.decrease();
+        model.showMeter();
+        model.updateBaby();
     });
 
 });
