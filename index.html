@@ -4,8 +4,182 @@
         <title>Main Page</title>
         <link rel="stylesheet" href="css/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="js/index.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="js/webpd-latest.js"></script>
     </head>
+
+
+  <script>
+    // ***BEGIN AUDIO SETUP***
+    var patch;
+    $.get('patches/SP4.pd', function(patchStr)  {
+      patch = Pd.loadPatch(patchStr);
+      Pd.start()
+    });
+
+    // Communicates a message to a receiver object receiverName in the audio patch
+    function audioMessage(receiverName, message)  {
+      Pd.send(receiverName, [message]);
+    }
+
+    // Communicates an array of messages messageArray to a receiver object receiverName in the audio patch
+    function audioMessageList(receiverName, messageArray)  {
+      Pd.send(receiverName, messageArray);
+    }
+    // ***END AUDIO SETUP***
+
+    //***BEGIN BABYPICS/METER SETUP***
+
+        function Model () {
+        this.sublevel = 0.0;
+        this.level = 4.0;
+
+        this.updateBaby = function() {
+            if (this.level < 1.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby1').show();
+            }
+            if (this.level >= 1.0 && this.level < 3.0)
+            {
+                jQuery('#baby1').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby2').show();
+            }
+            if (this.level >= 3.0 && this.level < 5.0)
+            {
+                jQuery('#baby1').hide();
+                jQuery('#baby2').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby3').show();
+            }
+            if (this.level >= 5.0 && this.level < 7.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby4').show();
+            }
+            if (this.level >= 7.0 && this.level < 9.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby6').hide();
+                jQuery('#baby5').show();
+            }
+            if (this.level >= 9.0)
+            {
+                jQuery('#baby2').hide();
+                jQuery('#baby3').hide();
+                jQuery('#baby1').hide();
+                jQuery('#baby4').hide();
+                jQuery('#baby5').hide();
+                jQuery('#baby6').show();
+            }
+        };
+
+        this.showMeter = function() {
+            displayLevel = Math.round(this.level);
+            displaySublevel = Math.round(this.sublevel);
+            jQuery('#meter' + displayLevel).show();
+            jQuery('#progress' + displaySublevel).show();
+        };
+
+        this.hideMeter = function() {
+            displayLevel = Math.round(this.level);
+            displaySublevel = Math.round(this.sublevel);
+            jQuery('#meter' + displayLevel).hide();
+            jQuery('#progress' + displaySublevel).hide();
+        };
+
+        this.increase = function() {
+            if (this.level < 9.0) {
+                this.sublevel = (this.sublevel + 1) % 5;
+                if (this.sublevel == 0.0) {
+                    this.level++;
+                }
+            }
+        };
+
+        this.decrease = function() {
+            if (!(this.level == 0.0 && this.sublevel == 0.0)) {
+                this.sublevel--;
+                if (this.sublevel < 0.0){
+                    this.sublevel = 4.0
+                }
+                if (this.sublevel == 0.0) {
+                    this.level--;
+                }
+            }
+        };
+    }
+
+    var model = new Model();
+
+    //***END BABYPICS/METER SET UP***
+
+
+    //***BEGIN SOCKET SETUP/PROCESSING***
+    $(function () {
+      var socket = io();
+      socket.on('chat message', function(icon_id){
+        //ok this is where icon_id button will be processed
+        console.log(icon_id);
+        //*** CALL ALGORITHMS FUNCTION HERE
+        //if soemthing good happens, call (these are Meghan's functions)
+        /*model.hideMeter();
+        model.increase();
+        model.showMeter();
+        model.updateBaby();*/
+
+        //if somethign bad happens, call
+        /*model.hideMeter();
+        model.decrease();
+        model.showMeter();
+        model.updateBaby();*/
+
+        //***END ALGORITHM FUNCTION***
+      });
+    });
+    //***END SOCKET SETUP/PROCESSING***
+
+    // If you're ever looking to interface with the audio patch, here are some tips:
+    //
+    // Use audioMessage(receiverName, message) to send a message to a specific object.
+        //
+    // Use audioMessageList(receiverName, messageArray) in the rare case that you need
+        //  to send a multipart message to an object (I don't foresee this happening yet).
+        //
+        // Proposed messages:
+        //   audioMessage("button<#>", <effect>)
+        //     - <#>: the number of the button that was pressed by some controller
+        //     - <effect>: a double (positive or negative) specifying the impact of the
+        //       button press, where more positive is better and more negative is worse
+        //
+        //   audioMessage("stage", <stageNumber>)
+        //     - <stageNumber>: the number of the stage just entered (1-11, where 11
+        //       indicates victory)
+        //
+        // If you think aanything is missing or if anything needs clarification here,
+        //  feel free to reach out!
+        //
+        // - Jacob <3
+
+  </script>
     <body>
         <div class="content">
             <table>
