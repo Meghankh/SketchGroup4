@@ -18,7 +18,7 @@ app.get('/controller', function(req, res){
 });
 
 app.get('/display', function(req, res){
-  res.sendFile(__dirname + '/index-tut.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 //pays attention to when someone goes to port 300
