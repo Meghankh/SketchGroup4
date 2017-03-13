@@ -32,11 +32,11 @@
     //***BEGIN BABYPICS/METER SETUP***
 
         function Model () {
-        this.sublevel = 0.0;
-        this.level = 4.0;
+        this.sublevel = 4.0;
+        this.level = 0.0;
 
         this.updateBaby = function() {
-            if (this.level < 1.0)
+            if (this.sublevel < 1.0)
             {
                 jQuery('#baby2').hide();
                 jQuery('#baby3').hide();
@@ -45,7 +45,7 @@
                 jQuery('#baby6').hide();
                 jQuery('#baby1').show();
             }
-            if (this.level >= 1.0 && this.level < 3.0)
+            if (this.sublevel >= 1.0 && this.sublevel < 3.0)
             {
                 jQuery('#baby1').hide();
                 jQuery('#baby3').hide();
@@ -54,7 +54,7 @@
                 jQuery('#baby6').hide();
                 jQuery('#baby2').show();
             }
-            if (this.level >= 3.0 && this.level < 5.0)
+            if (this.sublevel >= 3.0 && this.sublevel < 5.0)
             {
                 jQuery('#baby1').hide();
                 jQuery('#baby2').hide();
@@ -63,7 +63,7 @@
                 jQuery('#baby6').hide();
                 jQuery('#baby3').show();
             }
-            if (this.level >= 5.0 && this.level < 7.0)
+            if (this.sublevel >= 5.0 && this.sublevel < 7.0)
             {
                 jQuery('#baby2').hide();
                 jQuery('#baby1').hide();
@@ -72,7 +72,7 @@
                 jQuery('#baby6').hide();
                 jQuery('#baby4').show();
             }
-            if (this.level >= 7.0 && this.level < 9.0)
+            if (this.sublevel >= 7.0 && this.sublevel < 9.0)
             {
                 jQuery('#baby2').hide();
                 jQuery('#baby1').hide();
@@ -81,7 +81,7 @@
                 jQuery('#baby6').hide();
                 jQuery('#baby5').show();
             }
-            if (this.level >= 9.0)
+            if (this.sublevel >= 9.0)
             {
                 jQuery('#baby2').hide();
                 jQuery('#baby3').hide();
@@ -92,38 +92,53 @@
             }
         };
 
+        //need sublevel - meter
+        //need level - progress
         this.showMeter = function() {
             displayLevel = Math.round(this.level);
             displaySublevel = Math.round(this.sublevel);
-            jQuery('#meter' + displayLevel).show();
-            jQuery('#progress' + displaySublevel).show();
+            jQuery('#meter' + displaySublevel).show();
+            jQuery('#progress' + displayLevel).show();
         };
 
         this.hideMeter = function() {
             displayLevel = Math.round(this.level);
             displaySublevel = Math.round(this.sublevel);
-            jQuery('#meter' + displayLevel).hide();
-            jQuery('#progress' + displaySublevel).hide();
+            jQuery('#meter' + displaySublevel).hide();
+            jQuery('#progress' + displayLevel).hide();
         };
 
-        this.increase = function() {
-            if (this.level < 9.0) {
-                this.sublevel = (this.sublevel + 1) % 5;
-                if (this.sublevel == 0.0) {
-                    this.level++;
-                }
+        this.increase = function(step) {
+            if (this.sublevel < 9.0) {
+                this.sublevel = this.sublevel + step;
+            }
+            else{
+                //9 means any positive change leads to winning the level
+                this.level = this.level + 1;
+                this.sublevel = 0;
             }
         };
 
-        this.decrease = function() {
-            if (!(this.level == 0.0 && this.sublevel == 0.0)) {
-                this.sublevel--;
+        this.decrease = function(step) {
+            //because if sublevel is at 0, can't decrease
+            if (!(this.sublevel == 0.0)) {
+                if(this.sublevel - step >= 0){
+                    //also don't want subtraction to drop us
+                    //below 0
+                    this.sublevel = this.sublevel - step;
+                }   
+                else{
+                    this.sublevel = 0;
+                }
+                //we are going to refrain from dropping down levels once
+                //they are completed, but sublevels can drop down to 0
+                /*
                 if (this.sublevel < 0.0){
-                    this.sublevel = 4.0
+                    this.sublevel = 4.0;
                 }
                 if (this.sublevel == 0.0) {
-                    this.level--;
-                }
+                    this.level = this.level - step;
+                }*/
             }
         };
     }
@@ -132,27 +147,157 @@
 
     //***END BABYPICS/METER SET UP***
 
+    //***BEGIN ALG SET UP
+    var prevButton = "_0";
+var prevprev = "_0";
+//happiness is the sublevel I believe
+var happiness = 0;
+//totalScore is the level
+var totalScore = 0;
+
+var array1 = ["_1", "_2", "_3", "_4","_5", "_6"];
+var array2 = ["_4", "_5", "_6", "_3","_2", "_1"];
+var array3 = ["_1", "_4", "_3", "_6","_2", "_5"];
+var array4 = ["_6", "_5", "_4", "_3","_2", "_1"];
+
+var currArray = array1;
+
+function clockOverCheck(){
+    if (happiness >= 10) {
+        console.log("we ran");
+        //we just filled up sublevel
+        happiness = 0;
+        if (totalScore < 10) {
+            //aka won first level
+            totalScore = 10
+            currArray = array2;
+        }
+        else if (totalScore == 10) {
+            //aka won second level
+            totalScore = 20;
+            currArray = array2;
+        }
+        else if (totalScore == 20) {
+            //aka won third level
+            totalScore = 30;
+            currArray = array3;
+        }
+        else if (totalScore == 30) {
+            //aka won game
+            totalScore = 40;
+            //win game!!!
+        }
+    }
+}
+
+function changeStatus(buttonID){
+    var currBotton = buttonID;
+
+    var change = 0;
+    if (happiness < 8) { //happiness less than 8
+        //no clock over check because ther eis no positive input that is
+        //big enough to bring 7 --> 10
+        if (currBotton===currArray[0]) {
+            if (prevButton===currArray[1]) {
+                happiness = happiness + 2;
+                change =  2;
+            }
+            else {
+                happiness = happiness + 1;
+                change = 1;
+            }
+            
+        }
+        else if (currBotton===currArray[1]) {
+            happiness = happiness + 2;
+            change = 2;
+        }
+        else if (currBotton===currArray[2]) {
+            if (prevButton===currArray[1] && prevprev===currArray[0]) {
+                happiness = happiness + 2;
+                change = 2;
+            }
+            else {
+                happiness = happiness + 1;
+                change = 1;
+            }
+        }
+        else if (currBotton===currArray[3]) {
+            happiness = happiness - 1;
+            change = -1;
+        }
+        else if (currBotton===currArray[4]) {
+            if (prevButton===currArray[0]){
+                happiness = happiness - 1;
+                change = -1;
+            }
+            else {
+                happiness = happiness - 2;
+                change = -2;
+            }
+        }
+        else if (currBotton===currArray[5]) {
+            if (prevButton ===currArray[4] && prevprev===currArray[3]) {
+                change = 0;
+
+            }
+            else {
+                happiness = happiness - 2;
+                change = -2;
+            }   
+        }
+    }
+    else { //happiness between 8 & 10
+        console.log("happiness between 8 and 10 was reached");
+        console.log("current button is " + currBotton);
+        console.log("previous button is " + prevButton);
+        if (currBotton===currArray[1] && prevButton===currArray[0]) {
+            happiness = happiness + 1;  
+            clockOverCheck();
+            change = 1;
+        }
+        else if (currBotton===currArray[2]) {
+            if (prevButton===currArray[0] || prevButton===currArray[1]) {
+                happiness = happiness + 2;
+                clockOverCheck();
+                change = 2;
+            }
+        }
+    }
+
+    prevprev = prevButton;
+    prevButton = currBotton;
+    return change;
+}
+
+    //***END ALG SET UP
+
 
     //***BEGIN SOCKET SETUP/PROCESSING***
     $(function () {
       var socket = io();
       socket.on('chat message', function(icon_id){
-        //ok this is where icon_id button will be processed
-        console.log(icon_id);
-        //*** CALL ALGORITHMS FUNCTION HERE
-        //if soemthing good happens, call (these are Meghan's functions)
-        /*model.hideMeter();
-        model.increase();
-        model.showMeter();
-        model.updateBaby();*/
-
-        //if somethign bad happens, call
-        /*model.hideMeter();
-        model.decrease();
-        model.showMeter();
-        model.updateBaby();*/
-
+        console.log("icon id is" + icon_id);
+        //*** CALL ALGORITHMS FUNCTION HERE***
+        var change = changeStatus(icon_id);
+        console.log("change is " + change);
         //***END ALGORITHM FUNCTION***
+     
+        if(change > 0){
+            //call GUI change functions
+            model.hideMeter();
+            model.increase(change);
+            model.showMeter();
+            model.updateBaby();
+        }
+        if(change < 0){
+            //call GUI change functions
+            model.hideMeter();
+            model.decrease(change);
+            model.showMeter();
+            model.updateBaby();
+        }
+
       });
     });
     //***END SOCKET SETUP/PROCESSING***
