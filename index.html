@@ -6,30 +6,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-        <script src="js/webpd-latest.js"></script>
     </head>
 
 
   <script>
-    // ***BEGIN AUDIO SETUP***
-    var patch;
-    $.get('patches/SP4.pd', function(patchStr)  {
-      patch = Pd.loadPatch(patchStr);
-      Pd.start()
-    });
-
-    // Communicates a message to a receiver object receiverName in the audio patch
-    function audioMessage(receiverName, message)  {
-      Pd.send(receiverName, [message]);
-    }
-
-    // Communicates an array of messages messageArray to a receiver object receiverName in the audio patch
-    function audioMessageList(receiverName, messageArray)  {
-      Pd.send(receiverName, messageArray);
-    }
-    // ***END AUDIO SETUP***
-
-    //***BEGIN BABYPICS/METER SETUP***
 
         function Model () {
         this.sublevel = 4.0;
@@ -107,6 +87,7 @@
             jQuery('#meter' + displaySublevel).hide();
             jQuery('#progress' + displayLevel).hide();
         };
+B
 
         this.increase = function(step) {
             if (this.sublevel + step < 9.0) {
@@ -318,26 +299,7 @@ function changeStatus(buttonID){
 
     // If you're ever looking to interface with the audio patch, here are some tips:
     //
-    // Use audioMessage(receiverName, message) to send a message to a specific object.
-        //
-    // Use audioMessageList(receiverName, messageArray) in the rare case that you need
-        //  to send a multipart message to an object (I don't foresee this happening yet).
-        //
-        // Proposed messages:
-        //   audioMessage("button<#>", <effect>)
-        //     - <#>: the number of the button that was pressed by some controller
-        //     - <effect>: a double (positive or negative) specifying the impact of the
-        //       button press, where more positive is better and more negative is worse
-        //
-        //   audioMessage("stage", <stageNumber>)
-        //     - <stageNumber>: the number of the stage just entered (0-10, where 10
-        //       indicates victory)
-        //
-        // If you think aanything is missing or if anything needs clarification here,
-        //  feel free to reach out!
-        //
-        // - Jacob <3
-
+    // Don't.
   </script>
     <body>
         <div class="content">
@@ -372,6 +334,7 @@ function changeStatus(buttonID){
                     </td>  
                 </tr>
             </table> 
+        <button onclick="audioMessage('button1', 2.0)">blah</button>
         </div>
     </body>
 </html>
