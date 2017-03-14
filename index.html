@@ -13,11 +13,7 @@
 
 
         // *** BEGIN AUDIO JANK ***
-        var chordMap = [1, 2, 3, 4]; 
-        function testAudio() {
-            var audio = new Audio('audio/2_1.wav');
-            audio.play();
-        }
+        var chordMap = [1, 6, 7, 0, 9]; 
 
         function playButton(buttonName, buttonValue, levelNumber) {
             var buttonNumber = buttonName.substring(1);
@@ -192,26 +188,32 @@ function clockOverCheck(){
         //we just filled up sublevel
         happiness = 0;
         //TODO: send jacob notification that level changed
+        var levelNum = 0;
         if (totalScore < 9) {
             //aka won first level
             totalScore = 9
             currArray = array2;
+            levelNum = 1;
         }
         else if (totalScore == 9) {
             //aka won second level
             totalScore = 18;
             currArray = array3;
+            levelNum = 2;
         }
         else if (totalScore == 18) {
             //aka won third level
             totalScore = 27;
             currArray = array4;
+            levelNum = 3;
         }
         else if (totalScore == 27) {
             //aka won game
             totalScore = 36;
+            levelNum = 4;
             //win game!!!
         }
+        playChord(levelNum);
     }
 }
 
@@ -317,6 +319,7 @@ function changeStatus(buttonID){
         var change = changeStatus(icon_id);
         console.log("change is " + change);
         //***END ALGORITHM FUNCTION***
+        playButton(icon_id, change, model.level);
      
         if(!(model.level == 4)){
             if(change > 0){
