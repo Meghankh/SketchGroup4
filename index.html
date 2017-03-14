@@ -109,37 +109,38 @@
         };
 
         this.increase = function(step) {
-            if (this.sublevel < 9.0) {
+            if (this.sublevel + step < 9.0) {
                 this.sublevel = this.sublevel + step;
             }
             else{
-                //9 means any positive change leads to winning the level
+                //we won the level!
                 this.level = this.level + 1;
-                this.sublevel = 0;
+                if(this.level != 4){
+                    this.sublevel = 0;
+                }
+                else{
+                    this.sublevel = 9;
+                }
             }
+            console.log("sublevel is now " + this.sublevel);
+            console.log("level is now " + this.level);
         };
 
         this.decrease = function(step) {
             //because if sublevel is at 0, can't decrease
+            //sending in negative numbers in here, means +
             if (!(this.sublevel == 0.0)) {
-                if(this.sublevel - step >= 0){
+                if(this.sublevel + step >= 0){
                     //also don't want subtraction to drop us
                     //below 0
-                    this.sublevel = this.sublevel - step;
+                    this.sublevel = this.sublevel + step;
                 }   
                 else{
                     this.sublevel = 0;
                 }
-                //we are going to refrain from dropping down levels once
-                //they are completed, but sublevels can drop down to 0
-                /*
-                if (this.sublevel < 0.0){
-                    this.sublevel = 4.0;
-                }
-                if (this.sublevel == 0.0) {
-                    this.level = this.level - step;
-                }*/
             }
+            console.log("sublevel is now " + this.sublevel);
+            console.log("level is now " + this.level);
         };
     }
 
@@ -151,7 +152,7 @@
     var prevButton = "_0";
 var prevprev = "_0";
 //happiness is the sublevel I believe
-var happiness = 0;
+var happiness = 4;
 //totalScore is the level
 var totalScore = 0;
 
@@ -163,104 +164,113 @@ var array4 = ["_6", "_5", "_4", "_3","_2", "_1"];
 var currArray = array1;
 
 function clockOverCheck(){
-    if (happiness >= 10) {
-        console.log("we ran");
+    if (happiness >= 9) {
         //we just filled up sublevel
         happiness = 0;
-        if (totalScore < 10) {
+        if (totalScore < 9) {
             //aka won first level
-            totalScore = 10
+            totalScore = 9
             currArray = array2;
         }
-        else if (totalScore == 10) {
+        else if (totalScore == 9) {
             //aka won second level
-            totalScore = 20;
-            currArray = array2;
-        }
-        else if (totalScore == 20) {
-            //aka won third level
-            totalScore = 30;
+            totalScore = 18;
             currArray = array3;
         }
-        else if (totalScore == 30) {
+        else if (totalScore == 18) {
+            //aka won third level
+            totalScore = 27;
+            currArray = array4;
+        }
+        else if (totalScore == 27) {
             //aka won game
-            totalScore = 40;
+            totalScore = 36;
             //win game!!!
         }
     }
+}
+
+//make sure that when we change happiness,
+//it doesn't fall below 0
+function safeChange(change){
+    if(happiness + change < 0){
+        happiness = 0;
+    }
+    else{
+        happiness = happiness + change;
+    }
+    console.log("happiness is now " + happiness);
+    clockOverCheck();
 }
 
 function changeStatus(buttonID){
     var currBotton = buttonID;
 
     var change = 0;
-    if (happiness < 8) { //happiness less than 8
+    if (happiness < 6) { //happiness less than 8
         //no clock over check because ther eis no positive input that is
         //big enough to bring 7 --> 10
         if (currBotton===currArray[0]) {
             if (prevButton===currArray[1]) {
-                happiness = happiness + 2;
                 change =  2;
+                safeChange(change);
             }
             else {
-                happiness = happiness + 1;
                 change = 1;
+                safeChange(change);
             }
             
         }
         else if (currBotton===currArray[1]) {
-            happiness = happiness + 2;
             change = 2;
+            safeChange(change);
+            
         }
         else if (currBotton===currArray[2]) {
             if (prevButton===currArray[1] && prevprev===currArray[0]) {
-                happiness = happiness + 2;
                 change = 2;
+                safeChange(change);
             }
             else {
-                happiness = happiness + 1;
                 change = 1;
+                safeChange(change);
             }
         }
         else if (currBotton===currArray[3]) {
-            happiness = happiness - 1;
             change = -1;
+            safeChange(change);
         }
         else if (currBotton===currArray[4]) {
             if (prevButton===currArray[0]){
-                happiness = happiness - 1;
                 change = -1;
+                safeChange(change);
             }
             else {
-                happiness = happiness - 2;
                 change = -2;
+                safeChange(change);
             }
         }
         else if (currBotton===currArray[5]) {
             if (prevButton ===currArray[4] && prevprev===currArray[3]) {
                 change = 0;
-
             }
             else {
-                happiness = happiness - 2;
                 change = -2;
+                safeChange(change);
             }   
         }
     }
-    else { //happiness between 8 & 10
-        console.log("happiness between 8 and 10 was reached");
-        console.log("current button is " + currBotton);
-        console.log("previous button is " + prevButton);
-        if (currBotton===currArray[1] && prevButton===currArray[0]) {
-            happiness = happiness + 1;  
-            clockOverCheck();
+    else { //happiness between 6 & 10
+        console.log("happiness larger and 9 was reached");
+        if (currBotton===currArray[1] && prevButton===currArray[0]) { 
             change = 1;
+            safeChange(change);
+            
         }
         else if (currBotton===currArray[2]) {
             if (prevButton===currArray[0] || prevButton===currArray[1]) {
-                happiness = happiness + 2;
-                clockOverCheck();
                 change = 2;
+                safeChange(change);
             }
         }
     }
@@ -283,21 +293,22 @@ function changeStatus(buttonID){
         console.log("change is " + change);
         //***END ALGORITHM FUNCTION***
      
-        if(change > 0){
-            //call GUI change functions
-            model.hideMeter();
-            model.increase(change);
-            model.showMeter();
-            model.updateBaby();
+        if(!(model.level == 4)){
+            if(change > 0){
+                //call GUI change functions
+                model.hideMeter();
+                model.increase(change);
+                model.showMeter();
+                model.updateBaby();
+            }
+            if(change < 0){
+                //call GUI change functions
+                model.hideMeter();
+                model.decrease(change);
+                model.showMeter();
+                model.updateBaby();
+            }
         }
-        if(change < 0){
-            //call GUI change functions
-            model.hideMeter();
-            model.decrease(change);
-            model.showMeter();
-            model.updateBaby();
-        }
-
       });
     });
     //***END SOCKET SETUP/PROCESSING***
