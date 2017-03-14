@@ -11,6 +11,50 @@
 
   <script>
 
+
+        // *** BEGIN AUDIO JANK ***
+        var chordMap = [1, 2, 3, 4]; 
+        function testAudio() {
+            var audio = new Audio('audio/2_1.wav');
+            audio.play();
+        }
+
+        function playButton(buttonName, buttonValue, levelNumber) {
+            var buttonNumber = buttonName.substring(1);
+            if (buttonValue == 0)
+            {
+                return;
+            }
+            if (buttonValue < 0)
+            {
+                var audio = new Audio("audio/" + buttonNumber + "_X.wav");
+                audio.play();
+                return;
+            }
+            var chordNumber = chordMap[levelNumber];
+            var audio = new Audio("audio/" + buttonNumber + "_" + chordNumber.toString() + ".wav");
+            audio.play();
+        }
+
+        function playChord(levelNumber) {
+            var audio = [null, null, null, null, null, null];
+            for (var i=1; i<7; i++)
+            {
+                audio[i-1] = new Audio("audio/" + i.toString() + "_" + chordMap[levelNumber].toString() + ".wav");
+            }
+            for (var i=0; i<6; i++)
+            {
+                audio[i].play();
+            }
+        }
+
+        $(document).ready(function() {
+            playChord(0);
+        })
+
+        // *** END AUDIO JANK ***
+
+
         function Model () {
         this.sublevel = 4.0;
         this.level = 0.0;
@@ -87,7 +131,6 @@
             jQuery('#meter' + displaySublevel).hide();
             jQuery('#progress' + displayLevel).hide();
         };
-B
 
         this.increase = function(step) {
             if (this.sublevel + step < 9.0) {
@@ -334,7 +377,7 @@ function changeStatus(buttonID){
                     </td>  
                 </tr>
             </table> 
-        <button onclick="audioMessage('button1', 2.0)">blah</button>
+        <button onclick="playButton('_1', -1, 0)">blah</button>
         </div>
     </body>
 </html>
