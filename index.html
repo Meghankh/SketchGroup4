@@ -11,11 +11,14 @@
 
 
   <script>
-    // ***BEGIN AUDIO SETUP***
+
     var patch;
-    $.get('patches/SP4.pd', function(patchStr)  {
-      patch = Pd.loadPatch(patchStr);
-      Pd.start()
+
+    $(document).ready(function(){
+        $.get('patches/SP4.pd', function(patchStr)  {
+          patch = Pd.loadPatch(patchStr);
+          Pd.start()
+        });
     });
 
     // Communicates a message to a receiver object receiverName in the audio patch
@@ -27,7 +30,6 @@
     function audioMessageList(receiverName, messageArray)  {
       Pd.send(receiverName, messageArray);
     }
-    // ***END AUDIO SETUP***
 
     //***BEGIN BABYPICS/METER SETUP***
 
@@ -107,6 +109,7 @@
             jQuery('#meter' + displaySublevel).hide();
             jQuery('#progress' + displayLevel).hide();
         };
+B
 
         this.increase = function(step) {
             if (this.sublevel < 9.0) {
