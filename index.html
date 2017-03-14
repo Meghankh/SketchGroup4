@@ -167,6 +167,7 @@ function clockOverCheck(){
     if (happiness >= 9) {
         //we just filled up sublevel
         happiness = 0;
+        //TODO: send jacob notification that level changed
         if (totalScore < 9) {
             //aka won first level
             totalScore = 9
@@ -308,7 +309,9 @@ function changeStatus(buttonID){
                 model.showMeter();
                 model.updateBaby();
             }
+          //TODO:  wants level, weight, button pressed
         }
+
       });
     });
     //***END SOCKET SETUP/PROCESSING***
