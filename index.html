@@ -142,8 +142,6 @@
                     this.sublevel = 9;
                 }
             }
-            console.log("sublevel is now " + this.sublevel);
-            console.log("level is now " + this.level);
         };
 
         this.decrease = function(step) {
@@ -159,8 +157,6 @@
                     this.sublevel = 0;
                 }
             }
-            console.log("sublevel is now " + this.sublevel);
-            console.log("level is now " + this.level);
         };
     }
 
@@ -234,9 +230,7 @@ function changeStatus(buttonID){
     var currBotton = buttonID;
 
     var change = 0;
-    if (happiness < 6) { //happiness less than 8
-        //no clock over check because ther eis no positive input that is
-        //big enough to bring 7 --> 10
+    if (happiness < 6) { //happiness less than 6
         if (currBotton===currArray[0]) {
             if (prevButton===currArray[1]) {
                 change =  2;
@@ -288,17 +282,20 @@ function changeStatus(buttonID){
         }
     }
     else { //happiness between 6 & 10
-        console.log("happiness larger and 9 was reached");
+
         if (currBotton===currArray[1] && prevButton===currArray[0]) { 
             change = 1;
             safeChange(change);
             
         }
-        else if (currBotton===currArray[2]) {
-            if (prevButton===currArray[0] || prevButton===currArray[1]) {
-                change = 2;
-                safeChange(change);
-            }
+        else if (currBotton===currArray[2] && (prevButton===currArray[0] || prevButton===currArray[1])) {
+            change = 2;
+            safeChange(change);
+        }
+        else if(currBotton===currArray[1] || currBotton===currArray[0] || currBotton===currArray[2]){
+            //call playbutton so that any of these buttons pressed individually that are apart
+            //of the sequence ring happy
+            playButton(buttonID, 1, model.level);
         }
     }
 
@@ -314,13 +311,10 @@ function changeStatus(buttonID){
     $(function () {
       var socket = io();
       socket.on('chat message', function(icon_id){
-        console.log("icon id is" + icon_id);
         //*** CALL ALGORITHMS FUNCTION HERE***
         var change = changeStatus(icon_id);
-        console.log("change is " + change);
         //***END ALGORITHM FUNCTION***
         playButton(icon_id, change, model.level);
-     
         if(!(model.level == 4)){
             if(change > 0){
                 //call GUI change functions
@@ -336,7 +330,6 @@ function changeStatus(buttonID){
                 model.showMeter();
                 model.updateBaby();
             }
-          //TODO:  wants level, weight, button pressed
         }
 
       });
@@ -349,6 +342,7 @@ function changeStatus(buttonID){
   </script>
     <body>
         <div class="content">
+            <h1 id="title">Play Music to Help Baby Sleep!</h1>
             <table>
                 <tr>
                     <td id="babypic" style="width: 80%;">
@@ -380,7 +374,6 @@ function changeStatus(buttonID){
                     </td>  
                 </tr>
             </table> 
-        <button onclick="playButton('_1', -1, 0)">blah</button>
         </div>
     </body>
 </html>

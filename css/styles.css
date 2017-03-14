@@ -1,4 +1,9 @@
 
+#title{
+    text-align: center;
+    color: white;
+}
+
 #babypic div {
     border: 2px solid;
     border-radius: 25px;
@@ -141,7 +146,11 @@
 }
 
 .content {
-    width: 960px;
+    /*width: 960px;*/
+    /*TODO: help!*/
+    width: 60%;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 table {
@@ -149,6 +158,6 @@ table {
 }
 
 body {
-    background-color: steelblue;
+    background-color: lightskyblue;
 }
 
