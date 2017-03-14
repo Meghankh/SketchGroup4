@@ -13,13 +13,19 @@ app.use(express.static(__dirname + '/'));
 
 //But we want more html stuff, put in index.html
 //route handler
+app.get('/', function(req, res){
+    res.redirect('/controller');
+});
+
+
 app.get('/controller', function(req, res){
-  res.sendFile(__dirname + '/controller.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/display', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/display.html');
 });
+
 
 //pays attention to when someone goes to port 300
 //and leaves
