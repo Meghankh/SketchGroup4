@@ -6,158 +6,232 @@
 
 #babypic div {
     border: 2px solid;
-    border-radius: 25px;
-    height: 446px;
+    border-radius: 10%;
 }
 
 #meterbar div {
     border: 2px solid;
-    height: 446px;
 }
 
 #progressbar div {
     border: 2px solid;
-    height: 446px;
-    width: 180;
 }
 
 #baby1 {
     background-image: url(../images/baby6.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 #baby2 {
     background-image: url(../images/baby5.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 #baby3 {
     background-image: url(../images/baby4.jpg);
     background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 #baby4 {
     background-image: url(../images/baby3.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 #baby5 {
     background-image: url(../images/baby2.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 #baby6 {
     background-image: url(../images/baby1.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 59%;
 }
 
 
 #meter0 {
     background-image: url(../images/Meter0.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter1 {
     background-image: url(../images/Meter1.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter2 {
     background-image: url(../images/Meter2.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter3 {
     background-image: url(../images/Meter3.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter4 {
     background-image: url(../images/Meter4.jpg);
     background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter5 {
     background-image: url(../images/Meter5.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter6 {
     background-image: url(../images/Meter6.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter7 {
     background-image: url(../images/Meter7.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter8 {
     background-image: url(../images/Meter8.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #meter9 {
     background-image: url(../images/Meter9.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #progress0 {
     background-image: url(../images/progress0.jpg);
     background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #progress1 {
     background-image: url(../images/progress1.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #progress2 {
     background-image: url(../images/progress2.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #progress3 {
     background-image: url(../images/progress3.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
 #progress4 {
     background-image: url(../images/progress4.jpg);
-    background-size: contain;
     display: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 500%;
 }
 
-.content {
-    /*width: 960px;*/
-    /*TODO: help!*/
-    width: 60%;
-    padding-left: 20%;
-    padding-right: 20%;
+html body {
+    width: 100%;
 }
 
 table {
     width: 100%;
 }
 
-body {
-    background-color: lightskyblue;
-}
+
 
